@@ -24,3 +24,10 @@ O merge possui dois pais porque junta o histórico de duas branches diferentes. 
 ## 4. Tupla no método pais
 
 O método pais devolve uma tupla para proteger os dados internos da classe. Assim, quem utiliza o método consegue consultar os pais, mas não consegue modificar diretamente a lista armazenada no dicionário.
+
+## Como executar
+
+O projeto foi desenvolvido em Python 3 e pode ser executado pelo terminal com o comando:
+
+```bash
+python3 minigit.py
