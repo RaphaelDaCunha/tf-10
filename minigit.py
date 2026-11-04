@@ -3,6 +3,8 @@ from collections import deque
 
 
 class MiniGit:
+    # Controla os commits, branches e o histórico.
+
     __slots__ = (
         "__pais",
         "__mensagens",
@@ -13,6 +15,7 @@ class MiniGit:
     )
 
     def __init__(self):
+        # Inicializa o repositório vazio: 0 passos.
         self.__pais = {}
         self.__mensagens = {}
         self.__branches = {"main": None}
@@ -22,12 +25,12 @@ class MiniGit:
 
     @property
     def passos(self):
-        # Retorna os passos da última operação.
+        # Consulta os passos da última operação.
         return self.__passos
 
     @property
     def branch_atual(self):
-        # Retorna a branch atual.
+        # Consulta a branch atual.
         return self.__branch_atual
 
     # Cria um commit e move o ponteiro: 2 passos.
@@ -121,7 +124,7 @@ class MiniGit:
         self.__passos = 2
         return identificador
 
-    # Percorre o histórico com uma fila: 1 passo por commit.
+    # Percorre o histórico com uma fila: 1 passo por commit visitado.
     def log(self):
         fila = deque()
         commit_atual = self.__branches[self.__branch_atual]
@@ -173,6 +176,7 @@ class MiniGit:
         return tuple(resultado)
 
 
+# Executa uma ação e apresenta erros.
 def tentar(acao):
     try:
         acao()
@@ -180,7 +184,7 @@ def tentar(acao):
         print("erro:", erro)
 
 
-# Testes principais
+# Testes principais.
 
 git = MiniGit()
 git.commitar("primeiro commit")
@@ -207,7 +211,7 @@ print(git.log(), git.passos)
 git.trocar_branch("main")
 
 
-# Testes de erros
+# Testes de erros.
 
 tentar(lambda: git.trocar_branch("inexistente"))
 tentar(lambda: git.criar_branch("main"))
@@ -215,8 +219,7 @@ tentar(lambda: git.mesclar("main"))
 tentar(lambda: git.pais("c99"))
 
 
-# Medição dos passos
-
+# Mede os passos de escrita e leitura.
 def medir(quantidade):
     git_teste = MiniGit()
 
@@ -230,6 +233,8 @@ def medir(quantidade):
 
     return passos_commitar, passos_log
 
+
+# Apresenta a tabela de medição.
 
 print("\nTabela de medição")
 print("commits   passos do commitar   passos do log")
